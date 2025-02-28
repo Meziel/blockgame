@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Cube Runner Game</title>
+  <style>
+    body { margin: 0; }
+    /* Center the canvas; adjust as desired */
+    canvas { display: block; margin: 0 auto; background: #888; }
+  </style>
+</head>
+<body>
+  <!-- The canvas element where the game is rendered -->
+  <canvas id="canvas" width="800" height="600"></canvas>
+  
+  <!-- Include the Emscripten-generated JavaScript and WebAssembly -->
+  <script type="text/javascript" src="bin/main.js"></script>
+  
+  <!-- Simple script to forward keydown events to our C++ onKeyDown handler -->
+  <script type="text/javascript">
+    document.addEventListener('keydown', function(e) {
+	  if (Module._onKeyDown) {
+		Module._onKeyDown(e.keyCode);
+	  } else {
+		console.error("onKeyDown not exported");
+	  }
+	});
+  </script>
+</body>
+</html>
